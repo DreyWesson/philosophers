@@ -1,0 +1,50 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   index.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: doduwole <doduwole@student.42wolfsburg.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/20 17:26:57 by doduwole          #+#    #+#             */
+/*   Updated: 2023/09/23 08:08:26 by doduwole         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../inc/philo.h"
+
+int	validator(int argc, char **argv)
+{
+	if (!(argc == 6 || argc == 5))
+		return (ft_error("Too few arguments..."), 1);
+	while (*argv++)
+	{
+		if (*argv && is_digit(*argv))
+			return (ft_error("Invalid argument"), 2);
+	}
+	return (0);
+}
+
+int	validate_value(long val, t_args type)
+{
+	if (val == 0 && type != MEAL_NUM)
+		return (ft_error("Invalid value"), 0);
+	if (type == PHILO_NUM && val > 200)
+		return (ft_error("Too many philosophers"), 0);
+	return (val);
+}
+
+void	free_all(t_data *data, t_philo *phi)
+{
+	int i;
+
+	i = -1;
+	while (++i < data->philo_num)
+		pthread_mutex_destroy(data->mymutex + i);
+
+	pthread_mutex_destroy(&data->print);
+	pthread_mutex_destroy(&data->shared);
+	pthread_mutex_destroy(&data->tm);
+	free(data->mymutex);
+	free(data);
+	free(phi);
+}
