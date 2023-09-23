@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: doduwole <doduwole@student.42.fr>          +#+  +:+       +#+        */
+/*   By: doduwole <doduwole@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 17:19:38 by doduwole          #+#    #+#             */
-/*   Updated: 2023/09/23 11:12:19 by doduwole         ###   ########.fr       */
+/*   Updated: 2023/09/23 12:08:04 by doduwole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	init_data(t_data *data, char **argv, int argc)
 		data->n_eat = ft_atoi(argv[5]);
 	else
 		data->n_eat = -1;
-	if (!data->philo_num || !data->time.to_die || !data->time.to_eat || !data->time.to_sleep
-		|| (argc == 6 && !data->n_eat))
+	if (!data->philo_num || !data->time.to_die || !data->time.to_eat
+		|| !data->time.to_sleep || (argc == 6 && !data->n_eat))
 		return (ft_error("Some arguments are zero or out bound"), 0);
 	return (1);
 }
@@ -49,10 +49,10 @@ void	init_philo(t_philo *phi, t_data *data)
 	phi[i].data = data;
 }
 
-int mutex_init(t_data *data)
+int	mutex_init(t_data *data)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	data->mymutex = malloc(sizeof(pthread_mutex_t) * data->philo_num);
 	if (!data->mymutex)
@@ -65,9 +65,8 @@ int mutex_init(t_data *data)
 	return (1);
 }
 
-int init_mutex_two(t_philo *phi, int *i)
+int	init_mutex_two(t_philo *phi, int *i)
 {
-
 	if (pthread_mutex_init(&phi[*i].data->shared, NULL))
 		return (ft_error("Failed to initialise mutex"), 0);
 	if (pthread_mutex_init(&phi[*i].data->tm, NULL))

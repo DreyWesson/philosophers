@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: doduwole <doduwole@student.42.fr>          +#+  +:+       +#+        */
+/*   By: doduwole <doduwole@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 19:44:36 by doduwole          #+#    #+#             */
-/*   Updated: 2023/09/23 11:24:23 by doduwole         ###   ########.fr       */
+/*   Updated: 2023/09/23 12:07:15 by doduwole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@
 # define EAT "is eating"
 # define DIED "died"
 
-
 typedef enum e_args
 {
 	PHILO_NUM = 1,
@@ -38,7 +37,6 @@ typedef enum e_args
 	EAT_TIME = 3,
 	SLEEP_TIME = 4,
 	MEAL_NUM = 5
-
 }					t_args;
 
 typedef struct s_time
@@ -46,12 +44,12 @@ typedef struct s_time
 	int				to_die;
 	int				to_eat;
 	int				to_sleep;
-} t_time;
+}					t_time;
 
 typedef struct s_data
 {
 	int				philo_num;
-	t_time time;
+	t_time			time;
 	int				n_eat;
 	int				philo_died;
 	long long		timer;
@@ -66,14 +64,14 @@ typedef struct s_fork
 {
 	int				left;
 	int				right;
-} t_fork;
+}					t_fork;
 
 typedef struct s_philo
 {
 	int				id;
 	long long		t_die;
 	int				n_eaten;
-	t_fork hand;
+	t_fork			hand;
 	pthread_t		th;
 	t_data			*data;
 }					t_philo;
@@ -94,8 +92,8 @@ int					validate_value(long val, t_args type);
  */
 int					init_data(t_data *data, char **argv, int argc);
 void				init_philo(t_philo *phi, t_data *data);
-int mutex_init(t_data *data);
-int init_mutex_two(t_philo *phi, int *i);
+int					mutex_init(t_data *data);
+int					init_mutex_two(t_philo *phi, int *i);
 /**
  * ROUTINE FUNCTIONS
  */
@@ -108,7 +106,8 @@ void				*routine_two(void *args);
 /**
  * MSG FUNCTIONS
  */
-int					print_state(t_philo *phi, int id, char *color, char *status);
+int					print_state(t_philo *phi, int id, char *color,
+						char *status);
 /**
  * TIME FUNCTIONS
  */

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   index.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: doduwole <doduwole@student.42.fr>          +#+  +:+       +#+        */
+/*   By: doduwole <doduwole@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 17:25:07 by doduwole          #+#    #+#             */
-/*   Updated: 2023/09/22 19:20:48 by doduwole         ###   ########.fr       */
+/*   Updated: 2023/09/23 12:13:22 by doduwole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,7 @@ int	ft_atoi(const char *str)
 
 int	ft_error(char *message)
 {
-	printf("\033[1;31m"
-			"Error\n"
-			"\033[0m");
-	printf("\033[3m\033[2;37m"
-			" %s\n"
-			"\033[0m",
-			message);
+	printf("\033[1;31m""Error\n""\033[0m");
+	printf("\033[3m\033[2;37m"" %s\n""\033[0m", message);
 	return (0);
 }

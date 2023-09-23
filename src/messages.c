@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   messages.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: doduwole <doduwole@student.42.fr>          +#+  +:+       +#+        */
+/*   By: doduwole <doduwole@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 19:23:32 by doduwole          #+#    #+#             */
-/*   Updated: 2023/09/23 09:52:37 by doduwole         ###   ########.fr       */
+/*   Updated: 2023/09/23 12:10:33 by doduwole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	print_state(t_philo *phi, int id, char *color, char *status)
 {
-	long long now;
+	long long	now;
 
 	now = time_diff(phi->data->timer);
 	pthread_mutex_lock(&phi->data->print);
