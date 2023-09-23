@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: doduwole <doduwole@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: doduwole <doduwole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 19:44:36 by doduwole          #+#    #+#             */
-/*   Updated: 2023/09/23 08:17:27 by doduwole         ###   ########.fr       */
+/*   Updated: 2023/09/23 11:24:23 by doduwole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,38 +24,12 @@
 # define RED "\033[0;31m"
 # define NONE "\033[0m"
 
-typedef struct s_data
-{
-	int				philo_num;
-	int				t_die;
-	int				t_eat;
-	int				t_sleep;
-	int				n_eat;
-	int				philo_died;
-	long long		time;
-	pthread_t		monitor;
-	pthread_mutex_t	*mymutex;
-	pthread_mutex_t	shared;
-	pthread_mutex_t	tm;
-	pthread_mutex_t	print;
-}					t_data;
-
-typedef struct s_philo
-{
-	int				id;
-	long long		t_die;
-	int				n_eaten;
-	int				lfork;
-	int				rfork;
-	pthread_t		th;
-	t_data			*data;
-}					t_philo;
-
-# define EAT "is eating"
 # define SLEEP "is sleeping"
 # define THINK "is thinking"
 # define FORK "has taken a fork"
+# define EAT "is eating"
 # define DIED "died"
+
 
 typedef enum e_args
 {
@@ -66,6 +40,44 @@ typedef enum e_args
 	MEAL_NUM = 5
 
 }					t_args;
+
+typedef struct s_time
+{
+	int				to_die;
+	int				to_eat;
+	int				to_sleep;
+} t_time;
+
+typedef struct s_data
+{
+	int				philo_num;
+	t_time time;
+	int				n_eat;
+	int				philo_died;
+	long long		timer;
+	pthread_t		monitor;
+	pthread_mutex_t	*mymutex;
+	pthread_mutex_t	shared;
+	pthread_mutex_t	tm;
+	pthread_mutex_t	print;
+}					t_data;
+
+typedef struct s_fork
+{
+	int				left;
+	int				right;
+} t_fork;
+
+typedef struct s_philo
+{
+	int				id;
+	long long		t_die;
+	int				n_eaten;
+	t_fork hand;
+	pthread_t		th;
+	t_data			*data;
+}					t_philo;
+
 /**
  * UTILS FUNCTIONS
  */
@@ -81,26 +93,45 @@ int					validate_value(long val, t_args type);
  * INIT FUNCTIONS
  */
 int					init_data(t_data *data, char **argv, int argc);
-void				drop_forks(t_philo *phi, int flag);
 void				init_philo(t_philo *phi, t_data *data);
-void				routine_helper2(t_philo *phi);
-void				routine_helper1(t_philo *phi);
-void				routine2_helper2(t_philo *phi);
-void				routine2_helper1(t_philo *phi);
+int mutex_init(t_data *data);
+int init_mutex_two(t_philo *phi, int *i);
+/**
+ * ROUTINE FUNCTIONS
+ */
+void				routine_hungry(t_philo *phi);
+void				routine_refill(t_philo *phi);
+void				routine_two_hungry(t_philo *phi);
+void				routine_two_refill(t_philo *phi);
+void				*routine(void *arg);
+void				*routine_two(void *args);
+/**
+ * MSG FUNCTIONS
+ */
 int					print_state(t_philo *phi, int id, char *color, char *status);
+/**
+ * TIME FUNCTIONS
+ */
 long long			get_time(void);
 long long			time_diff(long long time);
 void				time_sim(long long time);
+/**
+ * FREE FUNCTIONS
+ */
 void				free_all(t_data *data, t_philo *phi);
-
-int					is_dead(t_philo *phi, int *i);
-int					philo_sleep(t_philo *phi);
+void				free_single(t_data *data, t_philo *phi);
+/**
+ * ACTION FUNCTIONS
+ */
 int					philo_eat(t_philo *phi);
-int					philo_think(t_philo *phi);
 int					philo_sleep(t_philo *phi);
-void				*routine(void *arg);
-int					simulation(t_philo *phi);
-int					th_create(t_philo *phi);
-void				*routine2(void *args);
+int					philo_think(t_philo *phi);
+int					is_dead(t_philo *phi, int *i);
+void				drop_forks(t_philo *phi, int flag);
+int					philo_sleep(t_philo *phi);
+/**
+ * THREAD FUNCTIONS
+ */
+int					handle_thread(t_philo *phi);
 
 #endif

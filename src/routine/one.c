@@ -1,62 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   routine.c                                          :+:      :+:    :+:   */
+/*   one.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: doduwole <doduwole@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: doduwole <doduwole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/22 19:18:16 by doduwole          #+#    #+#             */
-/*   Updated: 2023/09/23 08:15:47 by doduwole         ###   ########.fr       */
+/*   Created: 2023/09/23 10:20:42 by doduwole          #+#    #+#             */
+/*   Updated: 2023/09/23 11:21:39 by doduwole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/philo.h"
+#include "../../inc/philo.h"
 
-void	routine2_helper1(t_philo *phi)
+static int	simulation(t_philo *phi)
 {
-	int	i;
-
-	i = 0;
-	while (1)
+	if (!philo_eat(phi))
+		return (0);
+	if (phi->n_eaten != phi->data->n_eat)
 	{
-		pthread_mutex_lock(&phi->data->shared);
-		if (phi[i].data->n_eat > phi[i].n_eaten && !phi[i].data->philo_died)
-		{
-			pthread_mutex_unlock(&phi->data->shared);
-			if (is_dead(phi, &i))
-				break ;
-		}
-		else
-		{
-			pthread_mutex_unlock(&phi->data->shared);
-			break ;
-		}
+		if (!philo_sleep(phi))
+			return (0);
+		if (!philo_think(phi))
+			return (0);
 	}
+	return (1);
 }
 
-void	routine2_helper2(t_philo *phi)
+void	*routine(void *arg)
 {
-	int	i;
+	t_philo	*phi;
 
-	i = 0;
-	while (1)
-	{
-		pthread_mutex_lock(&phi->data->shared);
-		if (!phi[i].data->philo_died)
-		{
-			pthread_mutex_unlock(&phi->data->shared);
-			if (is_dead(phi, &i))
-				break ;
-		}
-		else
-		{
-			pthread_mutex_unlock(&phi->data->shared);
-			break ;
-		}
-	}
+	phi = arg;
+	if (phi->data->n_eat > 0)
+		routine_refill(phi);
+	else
+		routine_hungry(phi);
+	return (NULL);
 }
 
-void	routine_helper1(t_philo *phi)
+void	routine_refill(t_philo *phi)
 {
 	while (1)
 	{
@@ -74,7 +56,7 @@ void	routine_helper1(t_philo *phi)
 	}
 }
 
-void	routine_helper2(t_philo *phi)
+void	routine_hungry(t_philo *phi)
 {
 	while (1)
 	{

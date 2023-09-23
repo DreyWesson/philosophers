@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: doduwole <doduwole@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: doduwole <doduwole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 19:37:24 by doduwole          #+#    #+#             */
-/*   Updated: 2023/09/23 08:20:03 by doduwole         ###   ########.fr       */
+/*   Updated: 2023/09/23 11:30:14 by doduwole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 int	single_philo(t_data *data, t_philo *phi)
 {
-	data->time = get_time();
+	data->timer = get_time();
 	print_state(phi, 1, NONE, FORK);
-	time_sim(data->t_die);
+	time_sim(data->time.to_die);
 	print_state(phi, 1, RED, DIED);
-	free_all(data, phi);
+	free_single(data, phi);
 	return (0);
 }
 
@@ -34,13 +34,15 @@ int	main(int argc, char **argv)
 		return (ft_error("Memory allocation failed"), 2);
 	if (!init_data(data, argv, argc))
 		return (2);
+	if (!mutex_init(data))
+		return (3);
 	philo = malloc(sizeof(t_philo) * (data->philo_num + 1));
 	if (!philo)
 		return (ft_error("Memory allocation failed"), 4);
 	init_philo(philo, data);
 	if (data->philo_num == 1)
 		return (single_philo(data, philo));
-	if (!th_create(philo))
+	if (!handle_thread(philo))
 		return (free_all(data, philo), 6);
 	free_all(data, philo);
 	return (0);
