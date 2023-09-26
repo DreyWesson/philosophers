@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: doduwole <doduwole@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: doduwole <doduwole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 19:44:36 by doduwole          #+#    #+#             */
-/*   Updated: 2023/09/23 12:07:15 by doduwole         ###   ########.fr       */
+/*   Updated: 2023/09/26 17:17:57 by doduwole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 # define EAT "is eating"
 # define DIED "died"
 
+typedef pthread_mutex_t mutex_t;
+
 typedef enum e_args
 {
 	PHILO_NUM = 1,
@@ -41,23 +43,23 @@ typedef enum e_args
 
 typedef struct s_time
 {
-	int				to_die;
-	int				to_eat;
-	int				to_sleep;
+	uint64_t				to_die;
+	uint64_t				to_eat;
+	uint64_t				to_sleep;
 }					t_time;
 
 typedef struct s_data
 {
 	int				philo_num;
 	t_time			time;
-	int				n_eat;
-	int				philo_died;
-	long long		timer;
+	uint64_t				n_eat;
+	uint64_t				philo_died;
+	uint64_t		timer;
 	pthread_t		monitor;
-	pthread_mutex_t	*mymutex;
-	pthread_mutex_t	shared;
-	pthread_mutex_t	tm;
-	pthread_mutex_t	print;
+	mutex_t	*mymutex;
+	mutex_t	shared;
+	mutex_t	tm;
+	mutex_t	print;
 }					t_data;
 
 typedef struct s_fork
@@ -68,9 +70,9 @@ typedef struct s_fork
 
 typedef struct s_philo
 {
-	int				id;
-	long long		t_die;
-	int				n_eaten;
+	uint64_t		id;
+	uint64_t		t_die;
+	uint64_t		n_eaten;
 	t_fork			hand;
 	pthread_t		th;
 	t_data			*data;

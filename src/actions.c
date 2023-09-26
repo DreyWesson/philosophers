@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: doduwole <doduwole@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: doduwole <doduwole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 19:21:57 by doduwole          #+#    #+#             */
-/*   Updated: 2023/09/23 12:10:10 by doduwole         ###   ########.fr       */
+/*   Updated: 2023/09/26 17:02:22 by doduwole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	philo_think(t_philo *phi)
 
 int	is_dead(t_philo *phi, int *i)
 {
-	int	time;
+	uint64_t	time;
 
 	if (*i == phi[*i].data->philo_num)
 	{
