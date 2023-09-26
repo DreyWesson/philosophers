@@ -6,7 +6,7 @@
 /*   By: doduwole <doduwole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 10:20:23 by doduwole          #+#    #+#             */
-/*   Updated: 2023/09/26 17:59:15 by doduwole         ###   ########.fr       */
+/*   Updated: 2023/09/26 18:36:27 by doduwole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	*routine_two(void *args)
 {
 	t_philo	*phi;
 
-	phi = args;
+	phi = (t_philo *)args;
 	if (phi->data->n_eat > 0)
 		routine_two_limited(phi);
 	else

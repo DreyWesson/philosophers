@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: doduwole <doduwole@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: doduwole <doduwole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 19:37:24 by doduwole          #+#    #+#             */
-/*   Updated: 2023/09/23 12:06:30 by doduwole         ###   ########.fr       */
+/*   Updated: 2023/09/26 18:28:09 by doduwole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,5 @@ int	main(int argc, char **argv)
 		return (single_philo(data, philo));
 	if (!handle_thread(philo))
 		return (free_all(data, philo), 6);
-	free_all(data, philo);
-	return (0);
+	return (free_all(data, philo), 0);
 }
