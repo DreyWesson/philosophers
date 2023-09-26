@@ -6,7 +6,7 @@
 /*   By: doduwole <doduwole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 19:44:36 by doduwole          #+#    #+#             */
-/*   Updated: 2023/09/26 17:17:57 by doduwole         ###   ########.fr       */
+/*   Updated: 2023/09/26 18:01:26 by doduwole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define EAT "is eating"
 # define DIED "died"
 
-typedef pthread_mutex_t mutex_t;
+typedef pthread_mutex_t t_mutex;
 
 typedef enum e_args
 {
@@ -52,14 +52,14 @@ typedef struct s_data
 {
 	int				philo_num;
 	t_time			time;
-	uint64_t				n_eat;
-	uint64_t				philo_died;
+	uint64_t		n_eat;
+	uint64_t		philo_died;
 	uint64_t		timer;
 	pthread_t		monitor;
-	mutex_t	*mymutex;
-	mutex_t	shared;
-	mutex_t	tm;
-	mutex_t	print;
+	t_mutex			*mymutex;
+	t_mutex			shared;
+	t_mutex			tm;
+	t_mutex			print;
 }					t_data;
 
 typedef struct s_fork
@@ -70,7 +70,7 @@ typedef struct s_fork
 
 typedef struct s_philo
 {
-	uint64_t		id;
+	uint64_t		phi_id;
 	uint64_t		t_die;
 	uint64_t		n_eaten;
 	t_fork			hand;
@@ -95,14 +95,14 @@ int					validate_value(long val, t_args type);
 int					init_data(t_data *data, char **argv, int argc);
 void				init_philo(t_philo *phi, t_data *data);
 int					mutex_init(t_data *data);
-int					init_mutex_two(t_philo *phi, int *i);
+int					init_mutex_two(t_philo *phi, int i);
 /**
  * ROUTINE FUNCTIONS
  */
-void				routine_hungry(t_philo *phi);
-void				routine_refill(t_philo *phi);
-void				routine_two_hungry(t_philo *phi);
-void				routine_two_refill(t_philo *phi);
+void				routine_limited(t_philo *phi);
+void				routine_unlimited(t_philo *phi);
+void				routine_two_limited(t_philo *phi);
+void				routine_two_unlimited(t_philo *phi);
 void				*routine(void *arg);
 void				*routine_two(void *args);
 /**

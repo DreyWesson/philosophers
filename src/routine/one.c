@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   one.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: doduwole <doduwole@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: doduwole <doduwole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 10:20:42 by doduwole          #+#    #+#             */
-/*   Updated: 2023/09/23 12:11:27 by doduwole         ###   ########.fr       */
+/*   Updated: 2023/09/26 18:01:53 by doduwole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,7 @@ static int	simulation(t_philo *phi)
 	return (1);
 }
 
-void	*routine(void *arg)
-{
-	t_philo	*phi;
-
-	phi = arg;
-	if (phi->data->n_eat > 0)
-		routine_refill(phi);
-	else
-		routine_hungry(phi);
-	return (NULL);
-}
-
-void	routine_refill(t_philo *phi)
+void	routine_limited(t_philo *phi)
 {
 	while (1)
 	{
@@ -56,7 +44,7 @@ void	routine_refill(t_philo *phi)
 	}
 }
 
-void	routine_hungry(t_philo *phi)
+void	routine_unlimited(t_philo *phi)
 {
 	while (1)
 	{
@@ -73,4 +61,16 @@ void	routine_hungry(t_philo *phi)
 			break ;
 		}
 	}
+}
+
+void	*routine(void *arg)
+{
+	t_philo	*phi;
+
+	phi = arg;
+	if (phi->data->n_eat > 0)
+		routine_limited(phi);
+	else
+		routine_unlimited(phi);
+	return (NULL);
 }

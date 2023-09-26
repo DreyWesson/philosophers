@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   threads.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: doduwole <doduwole@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: doduwole <doduwole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 19:14:44 by doduwole          #+#    #+#             */
-/*   Updated: 2023/09/23 12:10:52 by doduwole         ###   ########.fr       */
+/*   Updated: 2023/09/26 18:05:05 by doduwole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	handle_thread(t_philo *phi)
 	int	i;
 
 	i = 0;
-	if (!init_mutex_two(phi, &i))
+	if (!init_mutex_two(phi, i))
 		return (1);
 	usleep(2000);
 	phi->data->timer = get_time();

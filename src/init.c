@@ -6,7 +6,7 @@
 /*   By: doduwole <doduwole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 17:19:38 by doduwole          #+#    #+#             */
-/*   Updated: 2023/09/26 17:01:26 by doduwole         ###   ########.fr       */
+/*   Updated: 2023/09/26 17:52:29 by doduwole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,22 @@ int	init_data(t_data *data, char **argv, int argc)
 	return (1);
 }
 
+int	mutex_init(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	data->mymutex = malloc(sizeof(t_mutex) * data->philo_num);
+	if (!data->mymutex)
+		return (ft_error("My mutex memory allocation failed"), 0);
+	while (i < data->philo_num)
+		if (pthread_mutex_init(data->mymutex + i++, NULL))
+			return (ft_error("Failed to initialise mutex"), 0);
+	if (pthread_mutex_init(&data->print, NULL))
+		return (ft_error("Failed to initialise mutex"), 0);
+	return (1);
+}
+
 void	init_philo(t_philo *phi, t_data *data)
 {
 	int	i;
@@ -36,7 +52,7 @@ void	init_philo(t_philo *phi, t_data *data)
 	i = 0;
 	while (i < data->philo_num)
 	{
-		phi[i].id = i;
+		phi[i].phi_id = i;
 		phi[i].n_eaten = 0;
 		phi[i].t_die = 0;
 		phi[i].hand.left = i;
@@ -49,29 +65,13 @@ void	init_philo(t_philo *phi, t_data *data)
 	phi[i].data = data;
 }
 
-int	mutex_init(t_data *data)
+int	init_mutex_two(t_philo *phi, int i)
 {
-	int	i;
-
-	i = 0;
-	data->mymutex = malloc(sizeof(mutex_t) * data->philo_num);
-	if (!data->mymutex)
-		return (ft_error("Memory allocation failed"), 0);
-	while (i < data->philo_num)
-		if (pthread_mutex_init(data->mymutex + i++, NULL))
-			return (ft_error("Failed to initialise mutex"), 0);
-	if (pthread_mutex_init(&data->print, NULL))
+	if (pthread_mutex_init(&phi[i].data->shared, NULL))
 		return (ft_error("Failed to initialise mutex"), 0);
-	return (1);
-}
-
-int	init_mutex_two(t_philo *phi, int *i)
-{
-	if (pthread_mutex_init(&phi[*i].data->shared, NULL))
+	if (pthread_mutex_init(&phi[i].data->tm, NULL))
 		return (ft_error("Failed to initialise mutex"), 0);
-	if (pthread_mutex_init(&phi[*i].data->tm, NULL))
-		return (ft_error("Failed to initialise mutex"), 0);
-	if (pthread_create(&phi[0].data->monitor, NULL, routine_two, phi))
+	if (pthread_create(&phi[i].data->monitor, NULL, routine_two, phi))
 		return (ft_error("Failed to create thread"), 0);
 	return (1);
 }

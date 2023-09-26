@@ -6,7 +6,7 @@
 /*   By: doduwole <doduwole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 19:21:57 by doduwole          #+#    #+#             */
-/*   Updated: 2023/09/26 17:02:22 by doduwole         ###   ########.fr       */
+/*   Updated: 2023/09/26 17:42:30 by doduwole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 int	philo_eat(t_philo *phi)
 {
 	pthread_mutex_lock(&phi->data->mymutex[phi->hand.left]);
-	if (!print_state(phi, phi->id + 1, NONE, FORK))
+	if (!print_state(phi, phi->phi_id + 1, NONE, FORK))
 		return (drop_forks(phi, 1), 0);
 	pthread_mutex_lock(&phi->data->mymutex[phi->hand.right]);
-	if (!print_state(phi, phi->id + 1, NONE, FORK))
+	if (!print_state(phi, phi->phi_id + 1, NONE, FORK))
 		return (drop_forks(phi, 2), 0);
-	if (!print_state(phi, phi->id + 1, GREEN, EAT))
+	if (!print_state(phi, phi->phi_id + 1, GREEN, EAT))
 		return (drop_forks(phi, 2), 0);
 	pthread_mutex_lock(&phi->data->tm);
 	phi->t_die = get_time();
@@ -35,7 +35,7 @@ int	philo_eat(t_philo *phi)
 
 int	philo_sleep(t_philo *phi)
 {
-	if (!print_state(phi, phi->id + 1, NONE, SLEEP))
+	if (!print_state(phi, phi->phi_id + 1, NONE, SLEEP))
 		return (0);
 	time_sim(phi->data->time.to_sleep);
 	return (1);
@@ -43,7 +43,7 @@ int	philo_sleep(t_philo *phi)
 
 int	philo_think(t_philo *phi)
 {
-	if (!print_state(phi, phi->id + 1, NONE, THINK))
+	if (!print_state(phi, phi->phi_id + 1, NONE, THINK))
 		return (0);
 	return (1);
 }
@@ -62,7 +62,7 @@ int	is_dead(t_philo *phi, int *i)
 	if (time > phi[*i].data->time.to_die)
 	{
 		pthread_mutex_unlock(&phi->data->tm);
-		print_state(&phi[*i], phi[*i].id + 1, RED, DIED);
+		print_state(&phi[*i], phi[*i].phi_id + 1, RED, DIED);
 		pthread_mutex_lock(&phi->data->shared);
 		phi[*i].data->philo_died = 1;
 		pthread_mutex_unlock(&phi->data->shared);
