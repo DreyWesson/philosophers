@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   index.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: doduwole <doduwole@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: doduwole <doduwole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 17:25:07 by doduwole          #+#    #+#             */
-/*   Updated: 2023/09/23 12:13:22 by doduwole         ###   ########.fr       */
+/*   Updated: 2023/09/27 12:28:09 by doduwole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,7 @@ int	ft_atoi(const char *str)
 	i = 0;
 	nbr = 0;
 	is_neg = 0;
-	while (str[i] != '\0' && (str[i] == ' ' || str[i] == '\t' || str[i] == '\n'
-			|| str[i] == '\r' || str[i] == '\v' || str[i] == '\f'))
+	while (str[i] != '\0' && (str[i] >= 9 && str[i] <= 13))
 		i++;
 	if (str[i] != '\0' && str[i] == '-')
 		is_neg = 1;

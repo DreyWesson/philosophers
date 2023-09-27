@@ -6,7 +6,7 @@
 /*   By: doduwole <doduwole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 19:44:36 by doduwole          #+#    #+#             */
-/*   Updated: 2023/09/26 18:01:26 by doduwole         ###   ########.fr       */
+/*   Updated: 2023/09/27 12:24:50 by doduwole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define EAT "is eating"
 # define DIED "died"
 
-typedef pthread_mutex_t t_mutex;
+typedef pthread_mutex_t	t_mutex;
 
 typedef enum e_args
 {

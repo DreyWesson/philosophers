@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: doduwole <doduwole@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: doduwole <doduwole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 11:25:35 by doduwole          #+#    #+#             */
-/*   Updated: 2023/09/23 12:09:28 by doduwole         ###   ########.fr       */
+/*   Updated: 2023/09/27 13:10:53 by doduwole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@ void	free_all(t_data *data, t_philo *phi)
 	i = -1;
 	while (++i < data->philo_num)
 		pthread_mutex_destroy(data->mymutex + i);
+	i = 0;
+	while (i < data->philo_num)
+	{
+		pthread_mutex_destroy(&phi[i].data->tm);
+		pthread_mutex_destroy(&phi[i].data->shared);
+		i++;
+	}
 	pthread_mutex_destroy(&data->print);
 	pthread_mutex_destroy(&data->shared);
 	pthread_mutex_destroy(&data->tm);

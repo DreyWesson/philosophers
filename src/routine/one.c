@@ -6,7 +6,7 @@
 /*   By: doduwole <doduwole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 10:20:42 by doduwole          #+#    #+#             */
-/*   Updated: 2023/09/26 18:36:16 by doduwole         ###   ########.fr       */
+/*   Updated: 2023/09/27 12:25:29 by doduwole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	*routine(void *arg)
 {
 	t_philo	*phi;
 
-	phi = (t_philo*)arg;
+	phi = (t_philo *)arg;
 	if (phi->data->n_eat > 0)
 		routine_limited(phi);
 	else
