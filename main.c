@@ -6,7 +6,7 @@
 /*   By: doduwole <doduwole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 19:37:24 by doduwole          #+#    #+#             */
-/*   Updated: 2023/09/27 13:02:11 by doduwole         ###   ########.fr       */
+/*   Updated: 2023/09/27 13:50:43 by doduwole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	single_philo(t_data *data, t_philo *phi)
 {
-	if (pthread_mutex_init(&phi[0].data->shared, NULL))
+	if (pthread_mutex_init(&phi->data->shared, NULL))
 		return (ft_error("Failed to initialise mutex"), 0);
-	if (pthread_mutex_init(&phi[0].data->tm, NULL))
+	if (pthread_mutex_init(&phi->data->tm, NULL))
 		return (ft_error("Failed to initialise mutex"), 0);
 	data->timer = get_time();
 	print_state(phi, 1, NONE, FORK);

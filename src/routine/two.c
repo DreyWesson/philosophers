@@ -6,7 +6,7 @@
 /*   By: doduwole <doduwole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 10:20:23 by doduwole          #+#    #+#             */
-/*   Updated: 2023/09/26 18:36:27 by doduwole         ###   ########.fr       */
+/*   Updated: 2023/09/27 14:09:47 by doduwole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,14 @@ void	routine_two_limited(t_philo *phi)
 	while (1)
 	{
 		pthread_mutex_lock(&phi->data->shared);
+		pthread_mutex_unlock(&phi->data->shared);
 		if (phi[i].data->n_eat > phi[i].n_eaten && !phi[i].data->philo_died)
 		{
-			pthread_mutex_unlock(&phi->data->shared);
 			if (is_dead(phi, &i))
 				break ;
 		}
 		else
-		{
-			pthread_mutex_unlock(&phi->data->shared);
 			break ;
-		}
 	}
 }
 
@@ -42,17 +39,15 @@ void	routine_two_unlimited(t_philo *phi)
 	while (1)
 	{
 		pthread_mutex_lock(&phi->data->shared);
+		pthread_mutex_unlock(&phi->data->shared);
 		if (!phi[i].data->philo_died)
 		{
-			pthread_mutex_unlock(&phi->data->shared);
 			if (is_dead(phi, &i))
 				break ;
 		}
 		else
-		{
-			pthread_mutex_unlock(&phi->data->shared);
 			break ;
-		}
+	
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: doduwole <doduwole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 10:20:42 by doduwole          #+#    #+#             */
-/*   Updated: 2023/09/27 12:25:29 by doduwole         ###   ########.fr       */
+/*   Updated: 2023/09/27 14:09:10 by doduwole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@ static int	simulation(t_philo *phi)
 		return (0);
 	if (phi->n_eaten != phi->data->n_eat)
 	{
-		if (!philo_sleep(phi))
-			return (0);
-		if (!philo_think(phi))
+		if (!philo_sleep(phi) || !philo_think(phi))
 			return (0);
 	}
 	return (1);
@@ -31,16 +29,11 @@ void	routine_limited(t_philo *phi)
 	while (1)
 	{
 		pthread_mutex_lock(&phi->data->shared);
+		pthread_mutex_unlock(&phi->data->shared);
 		if ((phi->data->n_eat > phi->n_eaten) && !phi->data->philo_died)
-		{
-			pthread_mutex_unlock(&phi->data->shared);
 			simulation(phi);
-		}
 		else
-		{
-			pthread_mutex_unlock(&phi->data->shared);
 			break ;
-		}
 	}
 }
 
@@ -49,17 +42,14 @@ void	routine_unlimited(t_philo *phi)
 	while (1)
 	{
 		pthread_mutex_lock(&phi->data->shared);
+		pthread_mutex_unlock(&phi->data->shared);
 		if (!phi->data->philo_died)
-		{
-			pthread_mutex_unlock(&phi->data->shared);
+		{			
 			if (!simulation(phi))
 				break ;
 		}
 		else
-		{
-			pthread_mutex_unlock(&phi->data->shared);
 			break ;
-		}
 	}
 }
 
