@@ -6,7 +6,7 @@
 /*   By: doduwole <doduwole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 19:21:57 by doduwole          #+#    #+#             */
-/*   Updated: 2023/09/26 17:42:30 by doduwole         ###   ########.fr       */
+/*   Updated: 2023/09/29 10:44:03 by doduwole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	is_dead(t_philo *phi, int *i)
 		return (1);
 	}
 	pthread_mutex_unlock(&phi->data->tm);
-	*i = *i + 1;
+	*i += 1;
 	return (0);
 }
 

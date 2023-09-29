@@ -6,7 +6,7 @@
 /*   By: doduwole <doduwole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 19:44:36 by doduwole          #+#    #+#             */
-/*   Updated: 2023/09/29 09:06:02 by doduwole         ###   ########.fr       */
+/*   Updated: 2023/09/29 10:31:05 by doduwole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,12 +98,8 @@ int					mutex_init(t_data *data);
 /**
  * ROUTINE FUNCTIONS
  */
-void				routine_limited(t_philo *phi);
-void				routine_unlimited(t_philo *phi);
-void				routine_two_limited(t_philo *phi);
-void				routine_two_unlimited(t_philo *phi);
-void				*routine(void *arg);
-void				*routine_two(void *args);
+void				*monitor(void *args);
+void				*handle_philo(void *arg);
 /**
  * MSG FUNCTIONS
  */
