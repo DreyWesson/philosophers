@@ -6,7 +6,7 @@
 /*   By: doduwole <doduwole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 17:19:38 by doduwole          #+#    #+#             */
-/*   Updated: 2023/09/26 17:52:29 by doduwole         ###   ########.fr       */
+/*   Updated: 2023/09/29 09:05:34 by doduwole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,10 @@ int	mutex_init(t_data *data)
 			return (ft_error("Failed to initialise mutex"), 0);
 	if (pthread_mutex_init(&data->print, NULL))
 		return (ft_error("Failed to initialise mutex"), 0);
+	if (pthread_mutex_init(&data->shared, NULL))
+		return (ft_error("Failed to initialise mutex"), 0);
+	if (pthread_mutex_init(&data->tm, NULL))
+		return (ft_error("Failed to initialise mutex"), 0);
 	return (1);
 }
 
@@ -65,13 +69,3 @@ void	init_philo(t_philo *phi, t_data *data)
 	phi[i].data = data;
 }
 
-int	init_mutex_two(t_philo *phi, int i)
-{
-	if (pthread_mutex_init(&phi[i].data->shared, NULL))
-		return (ft_error("Failed to initialise mutex"), 0);
-	if (pthread_mutex_init(&phi[i].data->tm, NULL))
-		return (ft_error("Failed to initialise mutex"), 0);
-	if (pthread_create(&phi[i].data->monitor, NULL, routine_two, phi))
-		return (ft_error("Failed to create thread"), 0);
-	return (1);
-}

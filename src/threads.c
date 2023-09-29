@@ -6,7 +6,7 @@
 /*   By: doduwole <doduwole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 19:14:44 by doduwole          #+#    #+#             */
-/*   Updated: 2023/09/26 18:20:25 by doduwole         ###   ########.fr       */
+/*   Updated: 2023/09/29 09:05:23 by doduwole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int	handle_thread(t_philo *phi)
 	int	i;
 
 	i = 0;
-	if (!init_mutex_two(phi, i))
-		return (1);
+	if (pthread_create(&phi[i].data->monitor, NULL, routine_two, phi))
+		return (ft_error("Failed to create thread"), 1);
 	usleep(3000);
 	phi->data->timer = get_time();
 	while (i < phi->data->philo_num)

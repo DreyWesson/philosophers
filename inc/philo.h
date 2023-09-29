@@ -6,7 +6,7 @@
 /*   By: doduwole <doduwole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 19:44:36 by doduwole          #+#    #+#             */
-/*   Updated: 2023/09/26 18:01:26 by doduwole         ###   ########.fr       */
+/*   Updated: 2023/09/29 09:06:02 by doduwole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ int					validate_value(long val, t_args type);
 int					init_data(t_data *data, char **argv, int argc);
 void				init_philo(t_philo *phi, t_data *data);
 int					mutex_init(t_data *data);
-int					init_mutex_two(t_philo *phi, int i);
 /**
  * ROUTINE FUNCTIONS
  */
