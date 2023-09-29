@@ -6,7 +6,7 @@
 /*   By: doduwole <doduwole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 19:44:36 by doduwole          #+#    #+#             */
-/*   Updated: 2023/09/29 13:00:42 by doduwole         ###   ########.fr       */
+/*   Updated: 2023/09/29 13:45:01 by doduwole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define EAT "is eating"
 # define DIED "died"
 
-typedef pthread_mutex_t t_mutex;
+typedef pthread_mutex_t	t_mutex;
 
 typedef enum e_args
 {
@@ -52,8 +52,8 @@ typedef struct s_data
 {
 	int				philo_num;
 	t_time			time;
-	int		n_eat;
-	int		philo_died;
+	int				n_eat;
+	int				philo_died;
 	long long		timer;
 	pthread_t		monitor;
 	t_mutex			*mymutex;
@@ -70,9 +70,9 @@ typedef struct s_fork
 
 typedef struct s_philo
 {
-	int		phi_id;
+	int				phi_id;
 	long long		t_die;
-	int		n_eaten;
+	int				n_eaten;
 	t_fork			hand;
 	pthread_t		th;
 	t_data			*data;

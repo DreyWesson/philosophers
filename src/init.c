@@ -6,7 +6,7 @@
 /*   By: doduwole <doduwole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 17:19:38 by doduwole          #+#    #+#             */
-/*   Updated: 2023/09/29 09:05:34 by doduwole         ###   ########.fr       */
+/*   Updated: 2023/09/29 13:45:22 by doduwole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,3 @@ void	init_philo(t_philo *phi, t_data *data)
 	phi[i].n_eaten = 0;
 	phi[i].data = data;
 }
-
