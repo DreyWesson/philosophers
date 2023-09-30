@@ -6,7 +6,7 @@
 /*   By: doduwole <doduwole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 19:44:36 by doduwole          #+#    #+#             */
-/*   Updated: 2023/09/29 13:45:01 by doduwole         ###   ########.fr       */
+/*   Updated: 2023/09/30 09:47:37 by doduwole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@
 
 # define SLEEP "is sleeping"
 # define THINK "is thinking"
-# define FORK "has taken a fork"
+# define L_FORK "has taken left fork"
+# define R_FORK "has taken right fork"
 # define EAT "is eating"
 # define DIED "died"
 

@@ -6,7 +6,7 @@
 /*   By: doduwole <doduwole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 19:37:24 by doduwole          #+#    #+#             */
-/*   Updated: 2023/09/29 09:01:53 by doduwole         ###   ########.fr       */
+/*   Updated: 2023/09/30 09:48:22 by doduwole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	single_philo(t_data *data, t_philo *phi)
 {
 	data->timer = get_time();
-	print_state(phi, 1, NONE, FORK);
+	print_state(phi, 1, NONE, L_FORK);
 	time_sim(data->time.to_die);
 	print_state(phi, 1, RED, DIED);
 	free_all(data, phi);

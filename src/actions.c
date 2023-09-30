@@ -6,7 +6,7 @@
 /*   By: doduwole <doduwole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 19:21:57 by doduwole          #+#    #+#             */
-/*   Updated: 2023/09/30 09:18:36 by doduwole         ###   ########.fr       */
+/*   Updated: 2023/09/30 09:47:52 by doduwole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 int	philo_eat(t_philo *phi)
 {
 	pthread_mutex_lock(&phi->data->mymutex[phi->hand.left]);
-	if (!print_state(phi, phi->phi_id + 1, NONE, FORK))
+	if (!print_state(phi, phi->phi_id + 1, NONE, L_FORK))
 		return (drop_forks(phi, 1), 0);
 	pthread_mutex_lock(&phi->data->mymutex[phi->hand.right]);
-	if (!print_state(phi, phi->phi_id + 1, NONE, FORK))
+	if (!print_state(phi, phi->phi_id + 1, NONE, R_FORK))
 		return (drop_forks(phi, 2), 0);
 	if (!print_state(phi, phi->phi_id + 1, GREEN, EAT))
 		return (drop_forks(phi, 2), 0);
@@ -55,7 +55,7 @@ int	is_dead(t_philo *phi, int *i)
 	if (*i == phi[*i].data->philo_num)
 	{
 		*i = 0;
-		usleep(300);
+		usleep(200);
 	}
 	pthread_mutex_lock(&phi->data->tm);
 	time = time_diff(phi[*i].t_die);
