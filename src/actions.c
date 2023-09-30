@@ -6,7 +6,7 @@
 /*   By: doduwole <doduwole@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 19:21:57 by doduwole          #+#    #+#             */
-/*   Updated: 2023/09/29 13:40:26 by doduwole         ###   ########.fr       */
+/*   Updated: 2023/09/30 09:18:36 by doduwole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	is_dead(t_philo *phi, int *i)
 	if (*i == phi[*i].data->philo_num)
 	{
 		*i = 0;
-		usleep(500);
+		usleep(300);
 	}
 	pthread_mutex_lock(&phi->data->tm);
 	time = time_diff(phi[*i].t_die);
